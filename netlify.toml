@@ -1,10 +1,9 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm ci && npm run build"
   publish = "out"
 
 [build.environment]
   NODE_VERSION = "18.18.0"
-  CI = "false"
 
 [[redirects]]
   from = "/*"
