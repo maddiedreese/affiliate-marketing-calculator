@@ -1,5 +1,6 @@
 // Whop SDK Integration
 import { WhopServerSdk } from "@whop/api";
+import { headers } from 'next/headers';
 
 export interface WhopUser {
   id: string;
@@ -38,28 +39,61 @@ export class WhopIntegration {
     }
   }
 
-  // Check if user has access to a specific access pass
-  async checkUserAccess(userId: string, accessPassId: string): Promise<boolean> {
+  // Verify user token and get user ID from headers (following official SDK pattern)
+  async verifyUserToken(): Promise<{ userId: string } | null> {
     try {
-      const result = await whopSdk.access.checkIfUserHasAccessToAccessPass({
-        accessPassId,
-        userId
-      });
-      return result.hasAccess;
+      const headersList = await headers();
+      const { userId } = await whopSdk.verifyUserToken(headersList);
+      return { userId };
     } catch (error) {
-      console.error('Error checking user access:', error);
-      return false;
+      console.error('Error verifying user token:', error);
+      return null;
     }
   }
 
-  // Get user information
+  // Check if user has access to the experience (following official SDK pattern)
+  async checkUserAccess(userId: string, experienceId?: string): Promise<{ hasAccess: boolean; accessLevel?: string }> {
+    try {
+      const result = await whopSdk.access.checkIfUserHasAccessToExperience({
+        userId,
+        experienceId: experienceId || process.env.NEXT_PUBLIC_WHOP_APP_ID || '',
+      });
+      
+      return {
+        hasAccess: result.hasAccess,
+        accessLevel: result.accessLevel,
+      };
+    } catch (error) {
+      console.error('Error checking user access:', error);
+      return { hasAccess: false };
+    }
+  }
+
+  // Check if user has access to a company (following official SDK pattern)
+  async checkCompanyAccess(userId: string, companyId: string): Promise<{ hasAccess: boolean }> {
+    try {
+      const result = await whopSdk.access.checkIfUserHasAccessToCompany({
+        userId,
+        companyId,
+      });
+      
+      return {
+        hasAccess: result.hasAccess,
+      };
+    } catch (error) {
+      console.error('Error checking company access:', error);
+      return { hasAccess: false };
+    }
+  }
+
+  // Get user information (following official SDK pattern)
   async getUser(userId: string): Promise<WhopUser | null> {
     try {
-      const result = await whopSdk.users.getCurrentUser();
+      const user = await whopSdk.users.getUser({ userId });
       return {
-        id: result?.user?.id || userId,
-        username: result?.user?.username || '',
-        email: result?.user?.email || '',
+        id: user?.id || userId,
+        username: user?.username || '',
+        email: user?.email || '',
       };
     } catch (error) {
       console.error('Error fetching user:', error);

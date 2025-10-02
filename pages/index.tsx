@@ -26,16 +26,23 @@ export default function AffiliateCalculator() {
         // Initialize the Whop SDK
         await whopApp.initialize();
         
-        // For demo purposes, we'll simulate user authentication
-        // In a real app, you'd get the user ID from Whop's authentication flow
-        const userId = 'demo-user-id'; // Replace with actual user ID from Whop
-        const accessPassId = 'demo-access-pass'; // Replace with your access pass ID
+        // Verify user token and get user ID (following official SDK pattern)
+        const tokenResult = await whopApp.verifyUserToken();
         
-        // Check if user has access
-        const userHasAccess = await whopApp.checkUserAccess(userId, accessPassId);
-        setHasAccess(userHasAccess);
+        if (!tokenResult) {
+          // No valid token - user needs to authenticate through Whop
+          setHasAccess(false);
+          setIsLoading(false);
+          return;
+        }
         
-        if (userHasAccess) {
+        const { userId } = tokenResult;
+        
+        // Check if user has access to the experience
+        const accessResult = await whopApp.checkUserAccess(userId);
+        setHasAccess(accessResult.hasAccess);
+        
+        if (accessResult.hasAccess) {
           // Get user information
           const userInfo = await whopApp.getUser(userId);
           setUser(userInfo);
