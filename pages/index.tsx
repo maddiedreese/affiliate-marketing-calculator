@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { Calculator, DollarSign, Percent, Target } from 'lucide-react';
 import AdvancedCalculator from '../components/AdvancedCalculator';
 import { whopApp, WhopUser } from '../lib/whop-integration';
-import '../styles/globals.css';
 
 interface CalculationResult {
   singleItemEarning: number;
