@@ -5,7 +5,8 @@ import { headers } from 'next/headers';
 export interface WhopUser {
   id: string;
   username: string;
-  email: string;
+  name?: string;
+  bio?: string;
   // Add other user properties as needed
 }
 
@@ -93,7 +94,8 @@ export class WhopIntegration {
       return {
         id: user?.id || userId,
         username: user?.username || '',
-        email: user?.email || '',
+        name: user?.name || undefined,
+        bio: user?.bio || undefined,
       };
     } catch (error) {
       console.error('Error fetching user:', error);

@@ -116,7 +116,7 @@ export default function AffiliateCalculator() {
             </p>
             {user && (
               <p className="text-sm text-gray-500 mt-2">
-                Welcome, {user.username || user.email}!
+                Welcome, {user.name || user.username}!
               </p>
             )}
           </div>
