@@ -41,8 +41,11 @@ export class WhopIntegration {
   // Check if user has access to a specific access pass
   async checkUserAccess(userId: string, accessPassId: string): Promise<boolean> {
     try {
-      const hasAccess = await whopSdk.access.checkIfUserHasAccessToAccessPass(userId, accessPassId);
-      return hasAccess;
+      const result = await whopSdk.access.checkIfUserHasAccessToAccessPass({
+        accessPassId,
+        userId
+      });
+      return result.hasAccess;
     } catch (error) {
       console.error('Error checking user access:', error);
       return false;
@@ -52,11 +55,11 @@ export class WhopIntegration {
   // Get user information
   async getUser(userId: string): Promise<WhopUser | null> {
     try {
-      const user = await whopSdk.users.retrieve(userId);
+      const result = await whopSdk.users.getCurrentUser();
       return {
-        id: user.id,
-        username: user.username || '',
-        email: user.email || '',
+        id: result?.user?.id || userId,
+        username: result?.user?.username || '',
+        email: result?.user?.email || '',
       };
     } catch (error) {
       console.error('Error fetching user:', error);
