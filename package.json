@@ -7,7 +7,7 @@
     "build": "npm run type-check && next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "./node_modules/.bin/tsc --noEmit"
+    "type-check": "node_modules/.bin/tsc --noEmit"
   },
   "dependencies": {
     "@whop/api": "^0.0.51",
