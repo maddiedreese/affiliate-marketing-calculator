@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run type-check && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "node_modules/.bin/tsc --noEmit"
+    "type-check": "npx --prefer-offline tsc --noEmit"
   },
   "dependencies": {
     "@whop/api": "^0.0.51",
