@@ -1,6 +1,5 @@
 // Whop SDK Integration
 import { WhopServerSdk } from "@whop/api";
-import { headers } from 'next/headers';
 
 export interface WhopUser {
   id: string;
@@ -40,12 +39,13 @@ export class WhopIntegration {
     }
   }
 
-  // Verify user token and get user ID from headers (following official SDK pattern)
+  // Verify user token and get user ID (for client-side usage)
   async verifyUserToken(): Promise<{ userId: string } | null> {
     try {
-      const headersList = await headers();
-      const { userId } = await whopSdk.verifyUserToken(headersList);
-      return { userId };
+      // For static export, we'll need to handle authentication differently
+      // This would typically be done through Whop's iframe authentication
+      // For now, we'll return null to indicate no authenticated user
+      return null;
     } catch (error) {
       console.error('Error verifying user token:', error);
       return null;
