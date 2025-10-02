@@ -109,111 +109,151 @@ export default function AdvancedCalculator({ onResultsChange }: AdvancedCalculat
 
   return (
     <div className="space-y-8">
-      {/* Tab Navigation */}
-      <div className="flex space-x-1 bg-gray-100 p-1 rounded-xl">
+      {/* Enhanced Tab Navigation */}
+      <div className="flex space-x-2 bg-gradient-to-r from-green-50 to-yellow-50 p-2 rounded-2xl border border-green-100">
         <button
           onClick={() => setActiveTab('basic')}
-          className={`flex-1 flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+          className={`flex-1 flex items-center justify-center px-6 py-4 rounded-xl font-semibold transition-all duration-300 ${
             activeTab === 'basic'
-              ? 'bg-white text-indigo-600 shadow-sm'
-              : 'text-gray-600 hover:text-gray-800'
+              ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg transform scale-105'
+              : 'text-gray-600 hover:text-green-600 hover:bg-white/50'
           }`}
         >
-          <Calculator className="h-5 w-5 mr-2" />
+          <Calculator className="h-5 w-5 mr-3" />
           Basic Calculator
         </button>
         <button
           onClick={() => setActiveTab('target')}
-          className={`flex-1 flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+          className={`flex-1 flex items-center justify-center px-6 py-4 rounded-xl font-semibold transition-all duration-300 ${
             activeTab === 'target'
-              ? 'bg-white text-purple-600 shadow-sm'
-              : 'text-gray-600 hover:text-gray-800'
+              ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg transform scale-105'
+              : 'text-gray-600 hover:text-yellow-600 hover:bg-white/50'
           }`}
         >
-          <Target className="h-5 w-5 mr-2" />
+          <Target className="h-5 w-5 mr-3" />
           Target Income
         </button>
       </div>
 
       {/* Basic Calculator Tab */}
       {activeTab === 'basic' && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Calculate Your Earnings</h2>
-            <p className="text-gray-600">Enter your product details to see potential earnings</p>
+        <div className="space-y-8 animate-fadeIn">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mb-4">
+              <Calculator className="h-8 w-8 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">Calculate Your Earnings</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Enter your product details to see potential earnings and discover your affiliate marketing potential</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="group">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <DollarSign className="h-4 w-4 mr-2 text-green-600" />
-                  Item Price
-                </label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={itemPrice}
-                    onChange={(e) => setItemPrice(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 group-hover:border-gray-300"
-                    placeholder="0.00"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 text-sm">$</span>
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-8 border border-green-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                    <div className="p-2 bg-green-100 rounded-lg mr-3">
+                      <DollarSign className="h-5 w-5 text-green-600" />
+                    </div>
+                    Item Price
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={itemPrice}
+                      onChange={(e) => setItemPrice(e.target.value)}
+                      className="w-full px-6 py-4 border-2 border-green-200 rounded-2xl focus:ring-4 focus:ring-green-500/20 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                      placeholder="0.00"
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                      <span className="text-green-600 text-lg font-semibold">$</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                    <div className="p-2 bg-yellow-100 rounded-lg mr-3">
+                      <Percent className="h-5 w-5 text-yellow-600" />
+                    </div>
+                    Affiliate Commission
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={affiliatePercentage}
+                      onChange={(e) => setAffiliatePercentage(e.target.value)}
+                      className="w-full px-6 py-4 border-2 border-yellow-200 rounded-2xl focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all duration-300 group-hover:border-yellow-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                      placeholder="0.00"
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                      <span className="text-yellow-600 text-lg font-semibold">%</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="group">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <Percent className="h-4 w-4 mr-2 text-blue-600" />
-                  Affiliate Commission
-                </label>
-                <div className="relative">
+              <div className="space-y-6">
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                    <div className="p-2 bg-blue-100 rounded-lg mr-3">
+                      <TrendingUp className="h-5 w-5 text-blue-600" />
+                    </div>
+                    Quantity Sold
+                  </label>
                   <input
                     type="number"
-                    step="0.01"
-                    value={affiliatePercentage}
-                    onChange={(e) => setAffiliatePercentage(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 group-hover:border-gray-300"
-                    placeholder="0.00"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-blue-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                    placeholder="1"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 text-sm">%</span>
-                  </div>
+                </div>
+
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                    <div className="p-2 bg-purple-100 rounded-lg mr-3">
+                      <BarChart3 className="h-5 w-5 text-purple-600" />
+                    </div>
+                    Monthly Sales
+                  </label>
+                  <input
+                    type="number"
+                    value={monthlySales}
+                    onChange={(e) => setMonthlySales(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-purple-200 rounded-2xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 group-hover:border-purple-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                    placeholder="0"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="group">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <TrendingUp className="h-4 w-4 mr-2 text-orange-600" />
-                  Quantity Sold
-                </label>
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 group-hover:border-gray-300"
-                  placeholder="1"
-                />
-              </div>
-
-              <div className="group">
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  <BarChart3 className="h-4 w-4 mr-2 text-purple-600" />
-                  Monthly Sales
-                </label>
-                <input
-                  type="number"
-                  value={monthlySales}
-                  onChange={(e) => setMonthlySales(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 group-hover:border-gray-300"
-                  placeholder="0"
-                />
-              </div>
+            {/* Calculate Button */}
+            <div className="mt-8 text-center">
+              <button
+                onClick={calculateEarnings}
+                disabled={isCalculating || !itemPrice || !affiliatePercentage}
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-lg font-semibold rounded-2xl hover:from-green-600 hover:to-emerald-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
+              >
+                {isCalculating ? (
+                  <>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                    <span>Calculating...</span>
+                  </>
+                ) : (
+                  <>
+                    <Zap className="h-6 w-6 mr-3" />
+                    <span>Calculate Earnings</span>
+                  </>
+                )}
+              </button>
+              
+              {(!itemPrice || !affiliatePercentage) && (
+                <p className="text-sm text-gray-500 mt-3">
+                  Please enter both item price and affiliate commission to calculate
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -221,71 +261,89 @@ export default function AdvancedCalculator({ onResultsChange }: AdvancedCalculat
 
       {/* Target Income Tab */}
       {activeTab === 'target' && (
-        <div className="space-y-6 animate-fadeIn">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Calculate Items Needed</h2>
-            <p className="text-gray-600">Set your income goal and see how many sales you need</p>
+        <div className="space-y-8 animate-fadeIn">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl mb-4">
+              <Target className="h-8 w-8 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-3">Calculate Items Needed</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Set your income goal and discover exactly how many sales you need to reach your target</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <Target className="h-4 w-4 mr-2 text-purple-600" />
-                Target Income
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="0.01"
-                  value={targetIncome}
-                  onChange={(e) => setTargetIncome(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 group-hover:border-gray-300"
-                  placeholder="0.00"
-                />
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500 text-sm">$</span>
+          <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 border border-yellow-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="group">
+                <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                  <div className="p-2 bg-yellow-100 rounded-lg mr-3">
+                    <Target className="h-5 w-5 text-yellow-600" />
+                  </div>
+                  Target Income
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={targetIncome}
+                    onChange={(e) => setTargetIncome(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-yellow-200 rounded-2xl focus:ring-4 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all duration-300 group-hover:border-yellow-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                    placeholder="0.00"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                    <span className="text-yellow-600 text-lg font-semibold">$</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group">
+                <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                  <div className="p-2 bg-green-100 rounded-lg mr-3">
+                    <Users className="h-5 w-5 text-green-600" />
+                  </div>
+                  Conversion Rate
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={conversionRate}
+                    onChange={(e) => setConversionRate(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-green-200 rounded-2xl focus:ring-4 focus:ring-green-500/20 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                    placeholder="2.00"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                    <span className="text-green-600 text-lg font-semibold">%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="group">
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                <Users className="h-4 w-4 mr-2 text-blue-600" />
-                Conversion Rate
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  step="0.01"
-                  value={conversionRate}
-                  onChange={(e) => setConversionRate(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 group-hover:border-gray-300"
-                  placeholder="2.00"
-                />
-                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500 text-sm">%</span>
-                </div>
-              </div>
+            {/* Calculate Button */}
+            <div className="mt-8 text-center">
+              <button
+                onClick={calculateItemsNeeded}
+                disabled={isCalculating || !targetIncome || !itemPrice || !affiliatePercentage}
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-lg font-semibold rounded-2xl hover:from-yellow-600 hover:to-orange-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
+              >
+                {isCalculating ? (
+                  <>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                    <span>Calculating...</span>
+                  </>
+                ) : (
+                  <>
+                    <Zap className="h-6 w-6 mr-3" />
+                    <span>Calculate Items Needed</span>
+                  </>
+                )}
+              </button>
+              
+              {(!targetIncome || !itemPrice || !affiliatePercentage) && (
+                <p className="text-sm text-gray-500 mt-3">
+                  Please enter target income, item price, and affiliate commission to calculate
+                </p>
+              )}
             </div>
           </div>
-
-          <button
-            onClick={calculateItemsNeeded}
-            disabled={isCalculating || !targetIncome || !itemPrice || !affiliatePercentage}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-          >
-            {isCalculating ? (
-              <>
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                <span>Calculating...</span>
-              </>
-            ) : (
-              <>
-                <Zap className="h-5 w-5" />
-                <span>Calculate Items Needed</span>
-              </>
-            )}
-          </button>
         </div>
       )}
 
