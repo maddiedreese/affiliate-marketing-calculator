@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && CI= npm run build"
+  command = "npm ci && CI= npm run build"
   publish = "out"
 
 [build.environment]
