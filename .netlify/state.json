@@ -2,5 +2,6 @@
   "site": {
     "id": "placeholder"
   },
-  "plugins": []
+  "plugins": [],
+  "disabledPlugins": ["@netlify/plugin-nextjs"]
 }
