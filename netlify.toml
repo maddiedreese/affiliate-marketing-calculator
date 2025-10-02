@@ -6,6 +6,7 @@
   NODE_VERSION = "22.0.0"
   NODE_ENV = "production"
   CI = "false"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 [build.processing]
   skip_processing = true
@@ -23,6 +24,10 @@
 
 [build.processing.images]
   compress = false
+
+# Disable all plugins
+[plugins]
+  disabled = true
 
 [[redirects]]
   from = "/*"
