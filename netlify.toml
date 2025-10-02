@@ -25,9 +25,7 @@
 [build.processing.images]
   compress = false
 
-# Disable all plugins
-[plugins]
-  disabled = true
+# No plugins configured
 
 [[redirects]]
   from = "/*"
