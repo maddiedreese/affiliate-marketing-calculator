@@ -267,11 +267,11 @@ export default function AdvancedCalculator({ onResultsChange }: AdvancedCalculat
               <Target className="h-8 w-8 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-gray-800 mb-3">Calculate Items Needed</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Set your income goal and discover exactly how many sales you need to reach your target</p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">Set your income goal and discover exactly how many items you need to sell to reach your target</p>
           </div>
           
           <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 border border-yellow-100">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="group">
                 <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
                   <div className="p-2 bg-yellow-100 rounded-lg mr-3">
@@ -297,21 +297,43 @@ export default function AdvancedCalculator({ onResultsChange }: AdvancedCalculat
               <div className="group">
                 <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
                   <div className="p-2 bg-green-100 rounded-lg mr-3">
-                    <Users className="h-5 w-5 text-green-600" />
+                    <DollarSign className="h-5 w-5 text-green-600" />
                   </div>
-                  Conversion Rate
+                  Item Price
                 </label>
                 <div className="relative">
                   <input
                     type="number"
                     step="0.01"
-                    value={conversionRate}
-                    onChange={(e) => setConversionRate(e.target.value)}
+                    value={itemPrice}
+                    onChange={(e) => setItemPrice(e.target.value)}
                     className="w-full px-6 py-4 border-2 border-green-200 rounded-2xl focus:ring-4 focus:ring-green-500/20 focus:border-green-500 transition-all duration-300 group-hover:border-green-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
-                    placeholder="2.00"
+                    placeholder="0.00"
                   />
                   <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                    <span className="text-green-600 text-lg font-semibold">%</span>
+                    <span className="text-green-600 text-lg font-semibold">$</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group">
+                <label className="block text-sm font-semibold text-gray-800 mb-3 flex items-center">
+                  <div className="p-2 bg-blue-100 rounded-lg mr-3">
+                    <Percent className="h-5 w-5 text-blue-600" />
+                  </div>
+                  Affiliate Commission
+                </label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={affiliatePercentage}
+                    onChange={(e) => setAffiliatePercentage(e.target.value)}
+                    className="w-full px-6 py-4 border-2 border-blue-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 group-hover:border-blue-300 bg-white/80 backdrop-blur-sm text-lg font-medium"
+                    placeholder="0.00"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                    <span className="text-blue-600 text-lg font-semibold">%</span>
                   </div>
                 </div>
               </div>
